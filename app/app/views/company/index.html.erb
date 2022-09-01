@@ -1,0 +1,9 @@
+<h1>Index Company Branches</h1>
+
+<ul>
+<% @companys.each do |company| %>
+  <li>
+  <%= link_to @company.name, company_path %>
+  </li>
+<% end %>
+</ul>
