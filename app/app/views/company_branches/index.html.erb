@@ -1,0 +1,12 @@
+<h1>Manage Company Branches</h1>
+
+<ul>
+  <% @stores.each do |store| %>
+    <li>
+      <a href="/company_branches/<%= store.id %>">
+        <%= store.name %>
+      </a>
+    </li>
+  <% end %>
+</ul>
+<%= link_to "New Store", new_company_branch_path %>

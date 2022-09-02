@@ -1,0 +1,13 @@
+<h1><%= @store.name %></h1>
+
+<p><%= @store.address %></p>
+
+<ul>
+  <li><%= link_to "Edit", edit_company_branch_path(@store) %></li>
+  <li><%= link_to "Delete", company_branch_path(@store), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  } %></li>
+</ul>
+
+<p><%= link_to "Go back", company_branches_path %></p>
