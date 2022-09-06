@@ -1,21 +1,18 @@
 class EmployeesController < ApplicationController
-  def index
-    @employees = Employee.all
-  end
-
   def show
-    @employee = Employee.find(params[:employee])
+    @employee = Employee.find(params[:id])
   end
+  
 
   def edit
-    @employee = Employee.find(params[:employee])
+    @employee = Employee.find(params[:id])
   end
   
   def update
-    @object = Employee.find(employee_params)
-      if @object.update_attributes(params[:employee])
+    @employee = Employee.find(employee_params)
+      if @employee.update_attributes(params[:employee])
         flash[:success] = "Object was successfully updated"
-        redirect_to @object
+        redirect_to @employee
       else
         flash[:error] = "Something went wrong"
         render 'edit'
@@ -26,7 +23,7 @@ class EmployeesController < ApplicationController
   end
   
   def create
-    @employee = Object.new(employee_params)
+    @employee = Employee.new(employee_params)
     if @employee.save
       flash[:success] = "Object successfully created"
       redirect_to @employee
@@ -37,19 +34,18 @@ class EmployeesController < ApplicationController
   end
 
   def destroy
-    @employee = Object.find(params[:id])
+    @employee = Employee.find(params[:id])
     if @employee.destroy
       flash[:success] = 'Object was successfully deleted.'
-      redirect_to objects_url
+      redirect_to employee_url
     else
       flash[:error] = 'Something went wrong'
-      redirect_to objects_url
+      redirect_to employee_url
     end
   end
   
-  
   private
   def employee_params
-    params.require(:employee).permit(:name, :email, :position, :id_employee, :private_number, :store)
+    params.require(:employee).permit(:name, :email, :position, :id_employee, :private_number, :store_id)
   end
 end
