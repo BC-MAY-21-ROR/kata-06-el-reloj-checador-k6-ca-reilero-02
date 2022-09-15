@@ -16,8 +16,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_14_212323) do
 
   create_table "daily_logs", force: :cascade do |t|
     t.date "day"
-    t.time "checkIn"
-    t.time "checkOut"
+    t.time "check_in"
+    t.time "check_out"
     t.bigint "employee_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -28,21 +28,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_14_212323) do
     t.string "email"
     t.string "name"
     t.string "position"
-    t.integer "id_employee"
-    t.integer "private_number"
+    t.string "id_employee", uniqueness: true
+    t.string "private_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "store_id", null: false
     t.boolean "status", default: true
     t.index ["store_id"], name: "index_employees_on_store_id"
-  end
-
-  create_table "posts", force: :cascade do |t|
-    t.string "title"
-    t.string "author"
-    t.text "blob"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "stores", force: :cascade do |t|
