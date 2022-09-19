@@ -7,4 +7,6 @@ class Employee < ApplicationRecord
 
 	belongs_to :store
 	has_many :dailyLog
+
+	scope :active_employees, -> { where( "status = true" ) }
 end
