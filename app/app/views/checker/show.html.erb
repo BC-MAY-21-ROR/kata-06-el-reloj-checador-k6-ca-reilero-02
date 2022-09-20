@@ -1,10 +1,36 @@
-<%= form_with url:'/', method: 'post' do |form| %>
-  
-  <div>
-    <%= form.label :id_employee, 'Enter id employee'%>
+<h1>
+  We are getting ready
+  <br>to launch new CREATIVE site!
+</h1>
+<ul class="countdown">
+    <li>
+        <span class="hours">10</span>
+        <h3>hours</h3>
+    </li>
+    <li>
+        <span class="minutes">15</span>
+        <h3>minutes</h3>
+    </li>
+    <li>
+        <span class="seconds">34</span>
+        <h3>seconds</h3>
+    </li>
+  </ul>
+
+
+<div class="subscribe-form">
+  <%= form_with url:'/', method: 'post' do |form| %>
+    <div>
+      <%= form.label :id_employee, 'Enter id employee'%>
+      <br>
+      <%= form.text_field :id_employee %>
+    </div>
     <br>
-    <%= form.text_field :id_employee %>
-  </div>
-  <br>
-  <%= form.submit 'Check' %>
-<% end %>
+    <%= form.submit 'Check', html: ({class: "form-control"}) %>
+  <% end %>
+</div>
+
+<form action="" method="get">
+<input type="email" name="email" class="form-control" placeholder="Enter your email" required="">
+<button type="submit" class="form-control"><i class="fa fa-envelope-o"></i></button>
+</form>
