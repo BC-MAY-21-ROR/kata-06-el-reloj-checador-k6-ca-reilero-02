@@ -17,4 +17,6 @@ Rails.application.routes.draw do
     resources :employees
   end
 
+  get '/reports', action: :index, controller: 'report' 
+
 end
