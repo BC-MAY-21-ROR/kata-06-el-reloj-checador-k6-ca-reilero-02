@@ -11,7 +11,7 @@
 </section>
   
 <section>
-  <h1>Report for: <%=Date::MONTHNAMES[@month.to_i]%> of <%= @year%>
+  <h1>Report for: <%=Date::MONTHNAMES[@month.to_i]%> of <%= @year%></h1>
   <%if !@monthly_reports.empty? %>
     <h1>Number of times employees didnt go to work this month: <%=@absence %> </h1>
     <h1>Average check_in time: <%=@avg_check_in[0]%>:<%=@avg_check_in[1]%> </h1>
