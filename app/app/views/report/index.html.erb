@@ -16,8 +16,28 @@
     <h1>Number of times employees didnt go to work this month: <%=@absence %> </h1>
     <h1>Average check_in time: <%=@avg_check_in[0]%>:<%=@avg_check_in[1]%> </h1>
     <h1>Average check_out time: <%=@avg_check_out[0]%>:<%=@avg_check_out[1]%> </h1>
-    
-  <%else %>
+    <h1>Attendance by day:</h1>
+    <table class="table">
+    <%4.times do |row|%>
+      <tr>
+      <%7.times do |column|%>
+        <td>
+          <%=(column+1)+(row)*7%><br>
+          <%=@attendance[column+row*7]%>/<%=@active_employees%>
+        </td>
+      <%end%>
+      </tr>
+    <%end%>
+    <tr>
+      <%(@days_in_month-28).times do |column| %>
+        <td>
+          <%= (column+1)+28 %><br>
+          <%=@attendance[column+28]%>/<%=@active_employees%>
+        </td>
+      <% end %>
+    </tr>
+    </table>
+  <%else%>
     <h1>No data found for this month</h1>
   <%end%>
 </section>
