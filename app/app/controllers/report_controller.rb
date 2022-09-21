@@ -1,9 +1,9 @@
 class ReportController < ApplicationController
   def index
-    @year = params.has_key?(:date)? params[:date][:year] : Time.current.year
-    @month = params.has_key?(:date)? params[:date][:month] : Time.current.month
+    @year = params.has_key?(:date)? params[:date][:year].to_i : Time.current.year
+    @month = params.has_key?(:date)? params[:date][:month].to_i : Time.current.month
     @monthly_reports = DailyLog.search_by_year(@year).search_by_month(@month)
-    @days_in_month = Time.days_in_month(@month.to_i,@year.to_i)
+    @days_in_month = (@month == Time.current.month)? (Time.current.day-1) : Time.days_in_month(@month,@year)
     if !@monthly_reports.empty?
       @reports = Hash.new
       for day in 1..@days_in_month
