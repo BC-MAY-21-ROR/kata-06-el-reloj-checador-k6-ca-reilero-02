@@ -18,5 +18,6 @@ module App
     #
     #config.time_zone = "America/Mexico_City"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.assets.paths << Rails.root.join("app", "assets", "fonts")
   end
 end

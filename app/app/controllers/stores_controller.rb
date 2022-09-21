@@ -16,7 +16,7 @@ class StoresController < ApplicationController
     @store = Store.new(store_params)
     if @store.save
       redirect_to @store
-    else 
+    else
       render :new, status: :unprocessable_entity
     end
   end

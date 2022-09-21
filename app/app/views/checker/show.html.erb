@@ -25,12 +25,11 @@
       <br>
       <%= form.text_field :id_employee %>
     </div>
-    <br>
-    <%= form.submit 'Check', html: ({class: "form-control"}) %>
+    <%= button_tag type: 'submit', id: "id_employee" do %>
+      Check
+      <span>
+        <i class="fa-sharp fa-solid fa-door-open"></i>
+      </span>
+    <% end %>
   <% end %>
 </div>
-
-<form action="" method="get">
-<input type="email" name="email" class="form-control" placeholder="Enter your email" required="">
-<button type="submit" class="form-control"><i class="fa fa-envelope-o"></i></button>
-</form>

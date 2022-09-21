@@ -1,4 +1,4 @@
-class ReportController < ApplicationController
+class Admins::ReportController < ApplicationController
   def index
   end
 
