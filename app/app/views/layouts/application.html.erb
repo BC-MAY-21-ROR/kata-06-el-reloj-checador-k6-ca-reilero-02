@@ -14,14 +14,14 @@
   </head>
 
   <body>
-  <section id="home">41214
+  <section id="home">
     <div class="overlay"></div>
       <div class="container">
           <div class="row">
             <div class="col-md-12 col-sm-12">
+            <%= link_to 'Back index', stores_path %>
             <%= render "shared/notices"%>
               <div class="home-info">
-                <%= link_to 'Back index', stores_path %>
                 <%= yield %>
               </div>
             </div>

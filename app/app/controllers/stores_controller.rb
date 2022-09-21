@@ -15,9 +15,9 @@ class StoresController < ApplicationController
   def create
     @store = Store.new(store_params)
     if @store.save
-      redirect_to @store
+      redirect_to @store, sucess:"new store created"
     else
-      render :new, status: :unprocessable_entity
+      render :new, info: "A error", status: :unprocessable_entity
     end
   end
 
@@ -29,9 +29,9 @@ class StoresController < ApplicationController
     @store = Store.find(params[:id])
 
     if @store.update(store_params)
-      redirect_to @store
+      redirect_to @store, sucess:"The store updated"
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, info: "A error",status: :unprocessable_entity
     end
   end
 
