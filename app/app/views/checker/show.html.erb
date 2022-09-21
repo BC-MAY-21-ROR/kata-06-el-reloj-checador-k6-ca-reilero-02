@@ -1,4 +1,4 @@
-<ul  data-controller="clock" class="countdown">
+<ul  data-controller="clock" class="countdown" style="background-color:black; border-radius: 10px;">
     <li>
         <span class="hours" data-clock-target="hours"></span>
         <h3>hours</h3>
@@ -17,11 +17,11 @@
 <div class="subscribe-form">
   <%= form_with url:'/', method: 'post' do |form| %>
     <div>
-      <%= form.label :id_employee, 'Enter id employee'%>
+      <%= form.label :id_employee, class: 'form-label'%>
       <br>
-      <%= form.text_field :id_employee %>
+      <%= form.text_field :id_employee, class: 'form-control', placeholder:'Enter id employee'%>
     </div>
-    <%= button_tag type: 'submit', id: "id_employee" do %>
+    <%= button_tag type: 'submit',class: "btn btn-secondary", id: "id_employee" do %>
       Check
       <span>
         <i class="fa-sharp fa-solid fa-door-open"></i>
