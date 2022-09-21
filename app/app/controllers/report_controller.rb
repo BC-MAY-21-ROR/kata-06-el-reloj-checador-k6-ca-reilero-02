@@ -1,15 +1,50 @@
 class ReportController < ApplicationController
   def index
-    @reports = DailyLog.search_by_month(Time.current.month).joins(:employee).merge(Employee.active_employees)
-    @starting_year = 1990
-    @current_year = Time.current.year
+    @year = params.has_key?(:date)? params[:date][:year] : Time.current.year
+    @month = params.has_key?(:date)? params[:date][:month] : Time.current.month
+    @monthly_reports = DailyLog.search_by_year(@year).search_by_month(@month)
+    @days_in_month = Time.days_in_month(@month.to_i,@year.to_i)
+    if !@monthly_reports.empty?
+      @reports = Hash.new
+      for day in 1..@days_in_month
+        @reports[day] = @monthly_reports.search_by_day(day).joins(:employee).merge(Employee.active_employees)
+      end
+      create_reports
+    end
   end
 
-  def search_by_day
-  	@reports = DailyLog.search_by_month(9).search_by_day(15).joins(:employee).merge(Employee.active_employees)
+  def create_reports
+    attendance_by_day
+    absence_by_month
+    average_time
   end
 
-  def search_by_month
-  	@reports = DailyLog.search_by_month(9).joins(:employee).merge(Employee.active_employees)
+  def absence_by_month
+    @active_employees = Employee.active_employees.count
+    @absence =  @active_employees*@days_in_month - @monthly_reports.count
+  end
+
+  def attendance_by_day
+    @attendance = []
+    for day in 1..@days_in_month
+  	  @attendance << @reports[day].count
+    end
+  end
+
+  def average_time
+    @check_in_hours = [0,0]
+    @check_out_hours = [0,0]
+    for day in 1..@days_in_month
+      @reports[day].each do |log|
+        if !log.nil?
+          @check_in_hours[0] += log.check_in.hour
+          @check_in_hours[1] += log.check_in.min
+          @check_out_hours[0] += log.check_out.hour
+          @check_out_hours[1] += log.check_out.min
+        end
+      end
+    end
+    @avg_check_in = @check_in_hours.map {|n| n / @monthly_reports.count}
+    @avg_check_out = @check_out_hours.map {|n| n / @monthly_reports.count}
   end
 end

@@ -14,10 +14,10 @@ class CheckerController < ApplicationController
 			@log = DailyLog.find_by(day: @date, employee: @employee)
 
 			if @log.nil?
-				DailyLog.create(day: @date, check_in: Time.now, employee: @employee )
+				DailyLog.create(day: @date, check_in: Time.current, employee: @employee )
 				redirect_to '/', notice: 'successfully checker'
 			elsif @log.check_out.nil?
-				@log.update(check_out: Time.now)
+				@log.update(check_out: Time.current)
 				redirect_to '/', notice: 'successfully checker'
 			else
 				redirect_to '/', notice: 'Employee had already checked out'
