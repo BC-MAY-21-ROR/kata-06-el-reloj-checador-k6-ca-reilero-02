@@ -1,14 +1,11 @@
 class ReportController < ApplicationController
   def index
-    @year = params.has_key?(:date)? params[:date][:year].to_i : Time.current.year
-    @month = params.has_key?(:date)? params[:date][:month].to_i : Time.current.month
-    @monthly_reports = DailyLog.search_by_year(@year).search_by_month(@month)
-    @days_in_month = (@month == Time.current.month)? (Time.current.day-1) : Time.days_in_month(@month,@year)
+    @today = Time.current
+    @year = params.has_key?(:date)? params[:date][:year].to_i : @today.year
+    @month = params.has_key?(:date)? params[:date][:month].to_i : @today.month
+    @monthly_reports = DailyLog.search_by_year(@year).search_by_month(@month).joins(:employee).merge(Employee.active_employees)
+    @days_in_month = (@month == @today.month)? (@today.day-1) : Time.days_in_month(@month,@year)
     if !@monthly_reports.empty?
-      @reports = Hash.new
-      for day in 1..@days_in_month
-        @reports[day] = @monthly_reports.search_by_day(day).joins(:employee).merge(Employee.active_employees)
-      end
       create_reports
     end
   end
@@ -27,24 +24,25 @@ class ReportController < ApplicationController
   def attendance_by_day
     @attendance = []
     for day in 1..@days_in_month
-  	  @attendance << @reports[day].count
+  	  @attendance << @monthly_reports.search_by_day(day).count
     end
   end
 
   def average_time
-    @check_in_hours = [0,0]
-    @check_out_hours = [0,0]
+    check_in_hours = [0,0]
+    check_out_hours = [0,0]
     for day in 1..@days_in_month
-      @reports[day].each do |log|
-        if !log.nil?
-          @check_in_hours[0] += log.check_in.hour
-          @check_in_hours[1] += log.check_in.min
-          @check_out_hours[0] += log.check_out.hour
-          @check_out_hours[1] += log.check_out.min
+      @monthly_reports.search_by_day(day).each do |log|
+        if log
+          check_in_hours[0] += log.check_in.hour
+          check_in_hours[1] += log.check_in.min
+          check_out_hours[0] += log.check_out.hour
+          check_out_hours[1] += log.check_out.min
         end
       end
     end
-    @avg_check_in = @check_in_hours.map {|n| n / @monthly_reports.count}
-    @avg_check_out = @check_out_hours.map {|n| n / @monthly_reports.count}
+    number_of_logs = @monthly_reports.count
+    @avg_check_in = check_in_hours.map {|num| num / number_of_logs}
+    @avg_check_out = check_out_hours.map {|num| num / number_of_logs}
   end
 end
