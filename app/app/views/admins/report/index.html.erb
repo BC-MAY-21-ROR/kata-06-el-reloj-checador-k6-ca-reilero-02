@@ -57,8 +57,8 @@
       <%end%>
   </section>
   <section class="report-form">
-  <p>Generate report for:</p> 
-  <%= form_with url: "/reports", method: :get do |form| %>
+  <p>Generate report for:</p>
+  <%= form_with url: report_index_path, method: :get do |form| %>
     <div class="">
       <%= form.label :month, "Month: " %>
       <%= select_month Date.today, class: "form-select form-select-lg mb-3"%>
