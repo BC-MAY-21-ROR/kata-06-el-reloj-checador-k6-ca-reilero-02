@@ -34,8 +34,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_19_232117) do
     t.string "email"
     t.string "name"
     t.string "position"
-    t.string "id_employee"
-    t.string "private_number"
+    t.integer "id_employee"
+    t.integer "private_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "store_id", null: false

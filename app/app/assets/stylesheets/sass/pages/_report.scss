@@ -1,0 +1,49 @@
+@use '../abstracts/variables';
+
+.report{
+  &-avg{
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-around;
+    span{
+      font-size: 20px;
+    }
+  }
+  &-attendance{
+    margin-top: 60px;
+  }
+  &-form{
+    position: absolute;
+    top: 90vh;
+    left: 40vw;
+  }
+  &-monthly{
+    margin-top: 20px;
+  }
+  &-no-data{
+    position: relative;
+    top: 200px;
+  }
+}
+
+.table{
+  caption{
+    font-size: 20px;
+    font-weight: bold;
+  }
+  th{
+    height: 50%;
+    text-align: center;
+  }
+  td{
+    height: 30px;
+  }
+  th, td {
+    border: 1px;
+    border-color: variables.$table-border-color;
+  }
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+  vertical-align: middle;
+}
