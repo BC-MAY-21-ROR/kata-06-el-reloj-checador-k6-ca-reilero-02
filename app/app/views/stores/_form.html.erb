@@ -3,17 +3,23 @@
     <div>
       <%= error %>
     </div>
-  <%end%>
-  <div>
-    <%= form.label :name, 'Name:'%>
-    <br>
-    <%= form.text_field :name%>
-  </div>
-  <br>
-  <div>
-    <%= form.label :address,'Address:'%>
-    <br>
-    <%= form.text_area :address%>
-  </div>
-  <%= form.submit%>
+  <% end %>
+
+  <form>
+    <div class="mb-3">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <%= form.text_field :name, class: "formGroupExampleInput", placeholder: "Name", placeholder: "Name", class: " form-control" %>
+      </div>
+      <div class="form-group">
+        <label for="address">Address</label>
+        <%= form.text_area :address, class:"form-control", id:"exampleFormControlTextarea1", placeholder: "Address"%>
+      </div>
+      <div>
+      <br>
+        <%= form.submit 'Create Store', class: "btn btn-primary" %>
+      </div>
+    </end>
+  </form>
+  
 <% end %>

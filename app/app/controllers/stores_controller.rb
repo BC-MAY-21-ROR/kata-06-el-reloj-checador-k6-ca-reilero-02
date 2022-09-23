@@ -1,11 +1,13 @@
 class StoresController < ApplicationController
   def index
     @stores = Store.all
+    @pagy, @stores = pagy_countless(@stores, items: 5)
   end
 
   def show
     @store = Store.find(params[:id])
     @employees = Employee.where(store: @store)
+    @pagy, @employees = pagy_countless(@employees, items: 5)
   end
 
   def new
