@@ -1,15 +1,24 @@
 
 <h1>Store <%= @store.name %> </h1>
-<p>Address: <%= @store.address %> </p>
 
-<ul>
-  <% @employees.each do |employee| %>
-    <li>
-    <%=link_to employee.name.capitalize, store_employee_path(@store,employee) %>
-    
-    </li>
-  <% end %>
-</ul>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">
+        <h4> Address: <%= @store.address %> </h4>
+        <h5> <%== pagy_nav(@pagy) %> </h5>
+      </th>
+  </thead>
+  <tbody>
+    <% @employees.each do |employee| %>
+      <tr>
+        <th scope="row">
+          <%=link_to employee.name.capitalize, store_employee_path(@store,employee) %>     
+        </th>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <%=link_to 'new employee', new_store_employee_url(@store) %>
 <%= link_to 'Edit store', edit_store_path(@store) %>
