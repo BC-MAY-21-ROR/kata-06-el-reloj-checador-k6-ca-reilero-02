@@ -11,6 +11,8 @@ unless Store.any?
   Store.create(company_branchs)
 end
 
+Admin.create(password:"ispassword")
+
 companys=Store.all
 
 companys.each do |company|

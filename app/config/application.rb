@@ -16,7 +16,7 @@ module App
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    #config.time_zone = "America/Mexico_City"
+    config.time_zone = "America/Mexico_City"
     # config.eager_load_paths << Rails.root.join("extras")
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
   end

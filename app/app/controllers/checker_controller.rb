@@ -7,20 +7,22 @@ class CheckerController < ApplicationController
 		if @employee.nil?
 			redirect_to '/', danger: 'Employee not found'
 		elsif !@employee.status
-			redirect_to '/', warning: 'Employee not active'
+			redirect_to '/', warning: 'Employee is not active'
 		else
 			@date = Date.current
 
 			@log = DailyLog.find_by(day: @date, employee: @employee)
 
 			if @log.nil?
-				DailyLog.create(day: @date, check_in: Time.now, employee: @employee )
-				redirect_to '/', success: 'successfully checker'
+				check_in = Time.current
+				DailyLog.create(day: @date, check_in: check_in, employee: @employee)
+				redirect_to '/', success: "Check In registered succesfully at: #{check_in.strftime("%H:%M")}"
 			elsif @log.check_out.nil?
+				check_out = Time.current
 				@log.update(check_out: Time.now)
-				redirect_to '/', success: 'successfully checker'
+				redirect_to '/', success: "Check Out registered succesfully at: #{check_out.strftime("%H:%M")}"
 			else
-				redirect_to '/', warning: 'Employee had already checked out'
+				redirect_to '/', warning: 'Error: Employee have already checked out'
 			end
 		end
 	end

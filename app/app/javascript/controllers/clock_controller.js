@@ -9,8 +9,8 @@ export default class extends Controller {
 
   get time(){
     let time = new Date();
-    this.hoursTarget.textContent = time.getHours();
-    this.minutesTarget.textContent = time.getMinutes();
-    this.secondsTarget.textContent = time.getSeconds();
+    this.hoursTarget.textContent = String(time.getHours()).padStart(2, '0');
+    this.minutesTarget.textContent = String(time.getMinutes()).padStart(2, '0');
+    this.secondsTarget.textContent = String(time.getSeconds()).padStart(2, '0');
   }
 }

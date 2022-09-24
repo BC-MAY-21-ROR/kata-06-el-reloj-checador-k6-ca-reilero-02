@@ -4,7 +4,7 @@ class Admins::ReportController < ApplicationController
     @year = params.has_key?(:date)? params[:date][:year].to_i : @today.year
     @month = params.has_key?(:date)? params[:date][:month].to_i : @today.month
     @monthly_reports = DailyLog.search_by_year(@year).search_by_month(@month).joins(:employee).merge(Employee.active_employees)
-    @days_in_month = (@month == @today.month)? (@today.day-1) : Time.days_in_month(@month,@year)
+    @days_in_month = (@month == @today.month)? (@today.day) : Time.days_in_month(@month,@year)
     if !@monthly_reports.empty?
       create_reports
     end
