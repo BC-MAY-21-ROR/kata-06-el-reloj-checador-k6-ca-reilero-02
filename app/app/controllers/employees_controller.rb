@@ -1,4 +1,5 @@
 class EmployeesController < ApplicationController
+  before_action :redirect_if_not_logged_in, only: [:create, :new, :edit, :update, :destroy]
   def show
     @employee = Employee.find(params[:id])
   end

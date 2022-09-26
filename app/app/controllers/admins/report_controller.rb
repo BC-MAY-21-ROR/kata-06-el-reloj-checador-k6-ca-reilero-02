@@ -1,4 +1,5 @@
 class Admins::ReportController < ApplicationController
+  before_action :redirect_if_not_logged_in, only: [:index]
   def index
     @today = Time.current
     @year = params.has_key?(:date)? params[:date][:year].to_i : @today.year

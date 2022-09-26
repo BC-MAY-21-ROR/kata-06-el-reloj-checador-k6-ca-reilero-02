@@ -1,4 +1,5 @@
 class StoresController < ApplicationController
+  before_action :redirect_if_not_logged_in, only: [:create, :new, :edit, :update, :destroy]
   def index
     @stores = Store.all
     @pagy, @stores = pagy_countless(@stores, items: 5)
