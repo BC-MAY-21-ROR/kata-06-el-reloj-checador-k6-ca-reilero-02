@@ -6,15 +6,15 @@ class Admins::AdminController < ApplicationController
 		admin= Admin.find_by(password: params[:password])
 		session[:admin_id]=admin.id unless admin.nil?
 		if admin.nil?
-			redirect_to '/', notice: "Wrong password"
+			redirect_to '/', danger: "Wrong password"
 		else
-			redirect_to '/', notice: "Login successfuly, Welcome Admin"
+			redirect_to '/', success: "Login successfuly, Welcome Admin"
 		end
 	end
 
 	def logout
 		session[:admin_id]= nil
-		redirect_to '/', notice: "Logged out"
+		redirect_to '/', warning: "Logged out"
 	end
 
 end

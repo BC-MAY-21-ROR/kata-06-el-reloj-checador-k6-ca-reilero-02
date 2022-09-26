@@ -12,7 +12,7 @@
           <%= link_to 'Reports', report_index_path, class: "nav-link" unless session[:admin_id].nil?%>
         </li>
         <li class="nav-item">
-          <%= link_to 'Login admin', new_admin_path,  class: "nav-link"  if session[:admin_id].nil?%>
+          <%= link_to 'Admin Login', new_admin_path,  class: "nav-link"  if session[:admin_id].nil?%>
         </li>
         <li class="nav-item">
           <%= link_to 'Logout', '/admins/logout', class: "nav-link"  unless session[:admin_id].nil?%>

@@ -33,7 +33,7 @@ class Admins::ReportController < ApplicationController
     check_out_hours = [0,0]
     for day in 1..@days_in_month
       @monthly_reports.search_by_day(day).each do |log|
-        if log
+        if log && log.check_out
           check_in_hours[0] += log.check_in.hour
           check_in_hours[1] += log.check_in.min
           check_out_hours[0] += log.check_out.hour
