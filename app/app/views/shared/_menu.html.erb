@@ -6,7 +6,7 @@
           <%= link_to 'Checker', root_path, class: "nav-link" %>
           </li>
         <li class="nav-item">
-          <%= link_to 'Stores', stores_path, class: "nav-link" if session[:admin_id].nil?%>
+          <%= link_to 'Stores', stores_path, class: "nav-link" unless session[:admin_id].nil?%>
         </li>
         <li class="nav-item">
           <%= link_to 'Reports', report_index_path, class: "nav-link" unless session[:admin_id].nil?%>
